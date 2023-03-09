@@ -1,0 +1,16 @@
+name: publish
+
+on: [push]
+
+jobs:
+  publish-ubuntu-gtk2-image:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build the Ubuntu:20.04 GTK2 Docker image
+      run: |
+        echo $CR_PAT | docker login ghcr.io -u stevendejongnl --password-stdin
+      env:
+        CR_PAT: ${{ secrets.CR_PAT }}
